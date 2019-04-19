@@ -12,10 +12,10 @@ We plan on using dijkstra's algorithm for calculating the distance and pathing, 
 ### Evaluation Plan:
 The success of the project will be determined by the following parameters:
 
- 1) The amount of times the AI dies fighting a single set of enemies.
- 2) The amount of time the AI takes to kill a certain set of enemies. 
- 3) The amount of time the AI is able to survive (without dying) fighting a consecutive set of enemies.
- 4) Whether the AI is able to surpass the score of human players. 
+- The amount of times the AI dies fighting a single set of enemies.
+- The amount of time the AI takes to kill a certain set of enemies. 
+- The amount of time the AI is able to survive (without dying) fighting a consecutive set of enemies.
+- Whether the AI is able to surpass the score of human players. 
 
 With the base score of 0 kills and 0 deaths, we expect to improve the combat efficiency of the AI by testing in various environments with a varying density as well as difficulty of enemies. We will be observing the progress of the AI in all sets of environments to verify whether the AI learns to fight and win.
 
