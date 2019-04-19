@@ -6,11 +6,11 @@ title:  Team
 # {{ page.title }}
 
 
-## USER 1
+## Elton Dan
 ***UCI Net ID***: dane
 
-## USER 2
+## Philip Huang
 ***UCI Net ID***: philiph1
 
-## USER 3
+## Dilsher Bhat
 ***UCI Net ID***: dilsherb
