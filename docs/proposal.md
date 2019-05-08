@@ -7,7 +7,7 @@ title:  Proposal
 Our team plans on implementing an AI that focuses on combat given a certain range and variety of monsters. (Ex. One Zombie and One Creeper) Given an array of monsters and a randomly generated weapon (Ex. Bow and Arrow), it will choose which enemy to kill first, calculate the optimal range to attack the monster, generate a path towards or away from the monster, and effectively fight the group. The overall goal of this AI is to apply it to other games and provide a companion that can assist players when fighting larger groups of enemies.
 
 ### AI/ML Algorithms:
-We plan on using dijkstra's algorithm for calculating the distance and pathing, as well as reinforcement learning using neural networks for learning the combat between each session.
+We plan on Deep Learning, more specifically, Neural Networks to make decisions on what enemy to fight first and what would be the best order to fight the enemies in.
 
 ### Evaluation Plan:
 The success of the project will be determined by the following parameters:
