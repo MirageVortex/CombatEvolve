@@ -10,7 +10,9 @@ def generate_room(width=20, length=20, monster_count=1):
 
 
     if (monster_count == 1):
-        room += '<DrawEntity x="5" y="64" z="7" type="Sheep"/>'
+        room += '<DrawEntity x="-5" y="64" z="5" type="Zombie"/>'
+        room += '<DrawEntity x="-8" y="64" z="-3" type="Zombie"/>'
+        room += '<DrawEntity x="8" y="64" z="1" type="Zombie"/>'
     else:
     	room += '''
     			'''

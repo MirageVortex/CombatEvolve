@@ -127,5 +127,7 @@ if __name__=='__main__':
 
 		print()
 		print("You have entered a dungeon")
+
 		sung_woo.run(agent_host)
+
 		print("Mission ended")

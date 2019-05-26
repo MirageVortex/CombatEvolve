@@ -127,6 +127,8 @@ class Hunter(object):
 					nearby_obs[name] = (ent['yaw'], ent['x'], ent['z'])
 
 				return nearby_obs, count
+			elif not world_state.is_mission_running:
+				return nearby_obs, count
 
 	def distance_from_enemy(self, x1, x2, z1, z2):
 		return ((x1 - x2)**2 + (z1 - z2)**2)**0.5
