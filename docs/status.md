@@ -14,6 +14,9 @@ We approached the problem by first implementing the Q-learning, a reinforcment l
 
 We obtained very specific information from Malmo about the world state to decide what entities were needed to be included into the states. We used the world state function to obtain the positions of all relative entities in the encapulsated area (Monsters and our AI), how much life they had after each update, and if there was a monster entity in front of it. Our AI would consider the distance it was away from the enemy and use this to plan out what action would provide it with the best total score. We packaged the states in a readable format and passed it to our action processing functions. Our AI then would fight against a zombie within 25 seconds as we saw that this was the shortest amount of time needed for our AI to die or kill the zombie.
 
+![Screenshot1](Screenshot_1.jpg "Screenshot1")
+
+![Screenshot2](Screenshot_2.jpg "Screenshot2")
 
 ### Evaluation: 
 We allowed our program to run for a total of 100 times to see how long it would take to efficiently fight against a single zombie. We are using several metrics such as win-rate and how long it takes for the AI to kill the enemy. Although this evaluation is very limited in how much data it is pulling from, we feel that it produced enough results for us to consider its problems and to see what we need to improve upon before the final report. Among the results, we noticed several things that the AI did that we were satisfied with for this iteration and one that we did not expect.
