@@ -2,7 +2,7 @@
 layout: default
 title:  Home
 ---
-![alt text](https://github.com/MirageVortex/CombatEvolved/tree/master/docs/maxresdefault.jpg)
+![Title Image](https://github.com/MirageVortex/CombatEvolved/blob/master/docs/maxresdefault.jpg)
 
 Source code: https://github.com/MirageVortex/CombatEvolved
 
