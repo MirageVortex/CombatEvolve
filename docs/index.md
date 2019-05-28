@@ -4,7 +4,7 @@ title:  Home
 ---
 ![Title Image](maxresdefault.jpg "Title Image")
 
-Source code: https://github.com/MirageVortex/CombatEvolved
+Source code: (https://github.com/MirageVortex/CombatEvolved)
 
 Reports:
 
