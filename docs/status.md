@@ -37,6 +37,5 @@ We drew heavy inspiration from the previous year's projects, Assignment 2 and ex
 - [Hit-Test Python Example](https://github.com/microsoft/malmo/blob/master/Malmo/samples/Python_examples/hit_test.py)
 - [Fighting Zombies In Minecraft With Deep Reinforcement Learning](http://cs229.stanford.edu/proj2016/report/UdagawaLeeNarasimhan-FightingZombiesInMinecraftWithDeepReinforcementLearning-report.pdf)
 
-
 ### Video:
-[Status Video](https://www.youtube.com/watch?v=TU2WY6N4FKA&feature=youtu.be&fbclid=IwAR2murUad0p6pT2JILmTKFQNF5fqeniV6j7myA_FTit0-TulIFOYb15xgUg)
+[![Status Video](https://img.youtube.com/vi/TU2WY6N4FKA/0.jpg)](https://www.youtube.com/watch?v=TU2WY6N4FKA "Status Video")
