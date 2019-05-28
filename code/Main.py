@@ -43,7 +43,7 @@ missionXML='''
             <DrawingDecorator>
                 '''+room+'''
             </DrawingDecorator>
-            <ServerQuitFromTimeUp timeLimitMs="30000"/>
+            <ServerQuitFromTimeUp timeLimitMs="25000"/>
             <ServerQuitWhenAnyAgentFinishes/>
         </ServerHandlers>
     </ServerSection>
@@ -62,7 +62,7 @@ missionXML='''
 			</ObservationFromNearbyEntities>
 			<ObservationFromFullStats/>
 			<RewardForDamagingEntity>
-				<Mob type="Sheep" reward="5"/>
+				<Mob type="Zombie" reward="50"/>
 			</RewardForDamagingEntity>
 			<ContinuousMovementCommands turnSpeedDegs="180"/>
 			<ObservationFromGrid>
@@ -125,9 +125,13 @@ if __name__=='__main__':
 		for error in world_state.errors:
 			print("Error:",error.text)
 
+
 		print()
+		print("Generation:", iRepeat)
 		print("You have entered a dungeon")
 
 		sung_woo.run(agent_host)
 
 		print("Mission ended")
+		if world_state.is_mission_running:
+			time.sleep(15)
