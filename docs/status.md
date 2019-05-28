@@ -32,11 +32,11 @@ We expect to run into issues with the incorporating the neural network into our 
 ### Resources:
 We drew heavy inspiration from the previous year's projects, Assignment 2 and external papers.  The previous year's projects that we used as reference was from group 20’s Gladiator and group 6’s Survival of the fittest. We also used the malmo python example code: hit_test.py to understand how the AI can visualize mobs.  We attribute most of our work on Q-tables from the experience we obtained from Assignment 2, and we designed our project concept based on the paper Fighting Zombies in Minecraft With Deep Reinforcement Learning by H. Udagawa, T. Narasimhan, S. Lee.
 
-- https://keiki83.github.io/Gladiator/
-- https://mingh2.github.io/SurvivalOfTheFittest/
-- https://github.com/microsoft/malmo/blob/master/Malmo/samples/Python_examples/hit_test.py
-- http://cs229.stanford.edu/proj2016/report/UdagawaLeeNarasimhan-FightingZombiesInMinecraftWithDeepReinforcementLearning-report.pdf
+- ![Gladiator](https://keiki83.github.io/Gladiator/)
+- ![Q-learning](https://mingh2.github.io/SurvivalOfTheFittest/)
+- ![Q-learning](https://github.com/microsoft/malmo/blob/master/Malmo/samples/Python_examples/hit_test.py)
+- ![Q-learning](http://cs229.stanford.edu/proj2016/report/UdagawaLeeNarasimhan-FightingZombiesInMinecraftWithDeepReinforcementLearning-report.pdf)
 
 
 ### Video:
-https://www.youtube.com/watch?v=TU2WY6N4FKA&feature=youtu.be&fbclid=IwAR2murUad0p6pT2JILmTKFQNF5fqeniV6j7myA_FTit0-TulIFOYb15xgUg
+[Status Video](https://www.youtube.com/watch?v=TU2WY6N4FKA&feature=youtu.be&fbclid=IwAR2murUad0p6pT2JILmTKFQNF5fqeniV6j7myA_FTit0-TulIFOYb15xgUg)
