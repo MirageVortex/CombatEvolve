@@ -2,8 +2,9 @@
 layout: default
 title:  Home
 ---
+![alt text](https://github.com/MirageVortex/CombatEvolved/tree/master/docs/maxresdefault.jpg)
 
-Source code: https://github.com/MirageVortex/CombatEvolved (_fix this_)
+Source code: https://github.com/MirageVortex/CombatEvolved
 
 Reports:
 
@@ -11,30 +12,15 @@ Reports:
 - [Status](status.html)
 - [Final](final.html)
 
-What's Markdown (`.md`)?
+## Our Mission:
+Create an AI that can learn to fight against multiple enemies and use it other games and see if it can adapt to the evironments there.
 
-Markdown is markup that lets you write hypertext (HTML) documents
-in easy-to-read and easy-to-write plain text.
-No angle brackets `<></>` required for
-paragraphs, lists, blockquotes, tables, etc.
+## Useful Links:
+http://cs229.stanford.edu/proj2016/report/UdagawaLeeNarasimhan-FightingZombiesInMinecraftWithDeepReinforcementLearning-report.pdf
+https://en.wikipedia.org/wiki/Q-learning
 
+## Other Projects that inspired us:
+https://keiki83.github.io/Gladiator/
+https://mingh2.github.io/SurvivalOfTheFittest/
 
-This is a paragraph (in Markdown). Some more
-text here.
-
-This is another paragraph.
-
-This is a list:
-
-- Orange
-- Apple
-- Blueberry
-
-$$x^2 = y^2$$
-
-
-Just getting started with Markdown?
-See the [HTML <-> Markdown Quick Reference (Cheat Sheet)][quickref].
-
-
-[quickref]: https://github.com/mundimark/quickrefs/blob/master/HTML.md
+https://www.youtube.com/watch?v=VaNi34cn9uE&t=21s

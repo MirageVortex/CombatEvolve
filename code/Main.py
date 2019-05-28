@@ -28,7 +28,7 @@ missionXML='''
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<About>
-        <Summary>Combat Evolved Project 1 - Prototype. Getting the AI to walk towards an enemy</Summary>
+        <Summary>Combat Evolved Project 1 - Prototype. AI vs Zombie</Summary>
     </About>
     <ServerSection>
         <ServerInitialConditions>
@@ -134,4 +134,4 @@ if __name__=='__main__':
 
 		print("Mission ended")
 		if world_state.is_mission_running:
-			time.sleep(15)
+			time.sleep(10)
