@@ -20,9 +20,9 @@ else:
 
 # enemy_type = "Zombie"
 # Uncomment below to make enemy a non-hostile enemy (training purposes)
-enemy_type = "Sheep"
+MOB_TYPES = ["Zombie", "Spider", "Skeleton"]
 
-room = roomgen.generate_room(20,20,1)
+room = roomgen.generate_room(20,20,3)
 
 missionXML='''
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
@@ -30,20 +30,26 @@ missionXML='''
 	<About>
         <Summary>Combat Evolved Project 1 - Prototype. AI vs Zombie</Summary>
     </About>
+
+	<ModSettings>
+		<MsPerTick>5</MsPerTick>
+	</ModSettings>
+
     <ServerSection>
         <ServerInitialConditions>
             <Time>
-                <StartTime>12000</StartTime>
+                <StartTime>6000</StartTime>
                 <AllowPassageOfTime>false</AllowPassageOfTime>
             </Time>
             <Weather>clear</Weather>
+            <AllowSpawning>false</AllowSpawning>
         </ServerInitialConditions>
         <ServerHandlers>
             <FlatWorldGenerator generatorString="3;7,57*1,5*3,2;3;,biome_1"/>
             <DrawingDecorator>
                 '''+room+'''
             </DrawingDecorator>
-            <ServerQuitFromTimeUp timeLimitMs="25000"/>
+            
             <ServerQuitWhenAnyAgentFinishes/>
         </ServerHandlers>
     </ServerSection>
@@ -61,10 +67,9 @@ missionXML='''
 				<Range name="entities" xrange="40" yrange="40" zrange="40"/>
 			</ObservationFromNearbyEntities>
 			<ObservationFromFullStats/>
-			<RewardForDamagingEntity>
-				<Mob type="Zombie" reward="50"/>
-			</RewardForDamagingEntity>
+			<MissionQuitCommands quitDescription="killed_all"/>
 			<ContinuousMovementCommands turnSpeedDegs="180"/>
+			<ChatCommands/>
 			<ObservationFromGrid>
 				<Grid name="env">
 					<min x="-10" y="0" z="-10"/>
@@ -76,6 +81,9 @@ missionXML='''
 </Mission>'''
 
 if __name__=='__main__':
+	win = 0
+	win_generation = []
+	monster_count = 1
 	random.seed(0)
 	print('Starting...', flush=True)
 
@@ -93,7 +101,7 @@ if __name__=='__main__':
 	    print(agent_host.getUsage())
 	    exit(0)
 
-	num_reps = 100
+	num_reps = 500
 	# alpha
 	sung_woo = Hunter.Hunter()
 
@@ -127,11 +135,26 @@ if __name__=='__main__':
 
 
 		print()
-		print("Generation:", iRepeat)
+		print("Generation:", iRepeat+1)
 		print("You have entered a dungeon")
 
-		sung_woo.run(agent_host)
+		if (iRepeat) > 150:
+			monster_count += 2
+
+		for i in range(monster_count):
+			monster = random.choice(MOB_TYPES)
+			x_pos = random.randint(-9, 9)
+			z_pos = random.randint(0, 9)
+			summon_command = "chat /summon " + monster + " " + str(x_pos) + " 64 " + str(z_pos)
+			agent_host.sendCommand(summon_command)
+
+		if sung_woo.run(agent_host):
+			win += 1
+			win_generation.append(iRepeat+1)
 
 		print("Mission ended")
-		if world_state.is_mission_running:
-			time.sleep(10)
+		print("Wins:", win)
+		print(win_generation)
+		if (sung_woo.epsilon > sung_woo.final_ep):
+			sung_woo.epsilon *= sung_woo.decay_rate
+		agent_host.sendCommand("quit")
