@@ -20,11 +20,11 @@ filter3_dim = 3
 filter3_depth = 64
 filter3_stride = 1
 
-actions =6
+actions = 6
 gamma = .99
 observe = 1000
 
-initial_epsilon = 1.0
+initial_epsilon = 0.7
 final_epsilon = 0.05
 decay_rate = 0.995
 replay_memory = 20000

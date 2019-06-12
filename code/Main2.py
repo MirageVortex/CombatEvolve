@@ -41,6 +41,7 @@ if __name__=='__main__':
 
 	network = nn.NeuralNetwork()
 	num_reps = 5000
+	monster_count = 1
 	win = 0
 	kills = 0
 	prev_kills = 0
@@ -50,7 +51,9 @@ if __name__=='__main__':
 	print('Starting...', flush=True)
 
 	for iRepeat in range(num_reps):
-		room = roomgen.generate_room(20,20,True)
+		if iRepeat == 250:
+			monster_count +=1 
+		room = roomgen.generate_room(20,20,monster_count)
 
 		missionXML='''
 		<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
@@ -59,9 +62,6 @@ if __name__=='__main__':
 		        <Summary>Combat Evolved Project 1 - Prototype. AI vs Zombie</Summary>
 		    </About>
 
-		    <ModSettings>
-				<MsPerTick>10</MsPerTick>
-			</ModSettings>
 		    <ServerSection>
 		        <ServerInitialConditions>
 		            <Time>
@@ -139,6 +139,7 @@ if __name__=='__main__':
 		print("Generation:", iRepeat+1)
 		print("You have entered a dungeon")
 		agent_host.sendCommand("chat /gamerule naturalRegeneration false")
+		agent_host.sendCommand("chat /gamerule doMobLoot false")
 
 		while world_state.is_mission_running:
 			time.sleep(0.02)
@@ -159,7 +160,8 @@ if __name__=='__main__':
 					network.agent.process_action(agent_host, network.agent.actions[action])
 
 				if len(ob['entities']) == 1:
-					kills = 1
+					win += 1
+					win_generation.append(iRepeat + 1)
 					agent_host.sendCommand("quit")
 
 			world_state = agent_host.getWorldState()
@@ -171,7 +173,6 @@ if __name__=='__main__':
 		print("Mission ended")
 		print("score:", network.agent.reward)
 		print("wins:", win)
-		print("kills: " ,kills )
 		# time = start_time - time.time()
 		# print("time:", time)
 		print(win_generation)

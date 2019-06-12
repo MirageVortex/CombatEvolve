@@ -14,13 +14,9 @@ class Hunter:
 
 	def __init__(self):
 		self.reward = 0
-		self.n = 1
-		self.gamma = 1
-		self.epsilon = 0.3
-		self.alpha = 0.3
 
 		self.actions = ["MoveUp", "MoveDown", "StopMoving", "TurnLeft", "TurnRight", "Attack"]
-		self.rewards = {"Health":-5, "Death":-100, "Look":1, "Hit":100, "Kill": 200, "Win":300}
+		self.rewards = {"Health":-5, "Death":-100, "Look":1, "Hit":300, "Kill": 400}
 
 		self.q_table = {}
 
