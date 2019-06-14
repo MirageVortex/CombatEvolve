@@ -83,10 +83,15 @@ The agent spends less time after a while trying to kill the monster as shown bel
 
 - 3v1 (66.57% win rate)
 ![3v1times](/docs/3v1_times.jpg "3v1-times")
+
+The drop in win rate is acceptable as the complexity of the problem significantly increases as the number of monsters increase.
+
 #### Qualatative
 The main tactic I saw from the agent is that it would hug the wall and have the monsters clump up together and it would attack all of them as they chase him. There were times when it would switch tactics and go on the offensive. It would suddenly go towards the enemy and fight rather than run away, and this was done when it had a better weapon. The agent would be more aggressive rather than evasive when it had a stronger weapon, which would result in it dying faster or killing faster. This is mostly shown when the agent had the diamond sword with the sharpness enhancement. 
 
 ![timesalive](/docs/timesalive.jpg "timesalive")
+
+Overall, we consider that the project is a success with the results produced despite needing to rely on handicaps.
 
 ### Resources:
 As we were updating the project to include Deep Reinforcement Learning, we referenced Fighting Zombies In Minecraft With Deep Reinforcmenet Learning () heavily as it provided a great basis for us to learn from. From then on we used TensorFlow's tutorials and documentation to try and figure out the rest of the network.
