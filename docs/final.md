@@ -30,7 +30,7 @@ Some more details of our environments.
 #### States
 Our states are 3 images (3 frames per tick) and processed by cv2 into a 84x84 grayscale image before being processed by the CNN.
 
-<img src="Sceenshot_2_1.jpg" alt="States" title="States">
+<img src="Screenshot_2_1.jpg" alt="States" title="States">
 
 #### Actions
 For our actions, we used continuous movement. We allow the AI to attack, move both forwards and backwards and to turn in both directions. Overall the AI had the following actions:
@@ -65,7 +65,7 @@ Our first tests were with a regular Diamond Sword (evaluated with win-rate)
 	- About 2x as much wins during 2nd half
 
 
-<img src="rate.jpg" alt="winrate" title="1v1winrate">
+<img src="win-rate.jpg" alt="winrate" title="1v1winrate">
 
 
 Agent performed a lot better within the second half of the training which is greatly improved over Q-Table implementation which only had a win-rate of 31%
@@ -87,17 +87,17 @@ Our last tests were done with the 1HKO sword to see how fast our agent would be 
 The agent spends less time after a while trying to kill the monster as shown below
 
 
-<img src="1v1-times.jpg" alt="1v1-times" title="1v1times">
+<img src="1v1_times.jpg" alt="1v1-times" title="1v1times">
 
 - 2v1 (73.14% win rate)
 
 
-<img src="2v1-times.jpg" alt="2v1_times" title="2v1times">
+<img src="2v1_times.jpg" alt="2v1_times" title="2v1times">
 
 - 3v1 (66.57% win rate))
 
 
-<img src="3v1-times.jpg" alt="3v1-times" title="3v1times">
+<img src="3v1_times.jpg" alt="3v1-times" title="3v1times">
 
 The drop in win rate is acceptable as the complexity of the problem significantly increases as the number of monsters increase.
 
