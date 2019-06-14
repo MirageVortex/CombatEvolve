@@ -11,7 +11,7 @@ Our project aims to train an AI agent to make decisions and triumph in combat in
 
 We use Deep Q-learning and Reinforcement learning to teach the AI how to make decisions on which enemies to fight first. Our agent is thrown into an enclosed room to fight against a group of enemies. It starts with just one enemy and the environment will sequentially update to add more enemies. The CNN takes in three images provided by Malmo before compiling the best action. This action will then produce a new state and that will produce a reward for the action. As the number of enemies increase, our agent is forced into a situation where it must adapt and choose whether to approach the enemy or run away. The agent will try to get the maximize the rewards by killing all enemies while avoiding attacks. This situation becomes more complex and harder for our agent to adjust to fighting multiple enemies as each additional enemy will deal more damage to the agent.
 
-![2v1_start](2v1_start.jpg "start")
+<img src="2v1_start.jpg" alt="2v1_start" title="start">
 
 ## Approach
 #### Malmo Environment
@@ -51,7 +51,7 @@ For our actions, we used continuous movement. We allow the AI to attack, move bo
 #### Algorithms and Equations
 We decided to use Deep Q Network to train our agent with providing 3 frames/images of the state as inputs to our convolutional neural network. The basic idea of Deep Q Network is similar to that of the Q-Learning where we have a reward (Q-Value) associated with a state and each of its corresponding action(s). Then we select the action which possesses the maximum Q-Value among all options. Our previous q-learning algorithm in our first baseline status report was adequate for training with 5 actions and a single enemy but with an increase in the number of actions to 6 and an increase in the density of mobs as well as the type of mobs, the number of states increases in complexity significantly and thus, we decided to use Deep Q Network, in which the Q-Function is represented by a Neural Network that takes a fixed input of images and outputs an action for the AI to perform based on q values.
 
-To balance between exploration and exploitation, we introduce Epsilon (-greedy) value which decreases at a constant decay rate once the number of runs exceeds the training observation number.
+To balance between exploration and exploitation, we introduce Epsilon (-greedy) value which decreases at a constant decay rate once the number of runs exceed the training observation number.
 
 ## Evaluation 
 #### Quantatitve
