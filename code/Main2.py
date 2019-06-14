@@ -45,21 +45,27 @@ if __name__=='__main__':
 	win = 0
 	kills = 0
 	prev_kills = 0
+	scores = []
 	win_generation = []
+	times = []
+	mode = "Survival"
 	random.seed(0)
-	start_time = time.time()
+	
 	print('Starting...', flush=True)
 
-	for iRepeat in range(num_reps):
-		if iRepeat == 250:
-			monster_count +=1 
-		room = roomgen.generate_room(20,20,monster_count)
+	for iRepeat in range(1, num_reps+1):
+		if iRepeat % 350 == 0:
+			monster_count +=1
 
+		if iRepeat == 100:
+			mode = "Survival"
+		room = roomgen.generate_room(20,20,monster_count)
+		start_time = time.time()
 		missionXML='''
 		<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 		<Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 			<About>
-		        <Summary>Combat Evolved Project 1 - Prototype. AI vs Zombie</Summary>
+		        <Summary>Combat Evolved Project</Summary>
 		    </About>
 
 		    <ServerSection>
@@ -76,22 +82,20 @@ if __name__=='__main__':
 		            <DrawingDecorator>
 		                '''+room+'''
 		            </DrawingDecorator>
-		            
+		            <ServerQuitFromTimeUp timeLimitMs="30000"/>
 		            <ServerQuitWhenAnyAgentFinishes/>
 		        </ServerHandlers>
 		    </ServerSection>
-			<AgentSection mode="Survival">
+			<AgentSection mode="'''+mode+'''">
 		        <Name>CombatEvolvedAI</Name>
 		        <AgentStart>
 		            <Placement x="0" y="64" z="-7" yaw="0"/>
-		            <Inventory>
-		            	<InventoryItem slot="0" type="diamond_sword"/>
-		            </Inventory>
+
 		        </AgentStart>
 				<AgentHandlers>
 					<ObservationFromRay/>
 					<ObservationFromNearbyEntities>
-						<Range name="entities" xrange="40" yrange="40" zrange="40"/>
+						<Range name="entities" xrange="60" yrange="1" zrange="60"/>
 					</ObservationFromNearbyEntities>
 					<ObservationFromFullStats/>
 					<MissionQuitCommands quitDescription="killed_all"/>
@@ -136,18 +140,23 @@ if __name__=='__main__':
 
 
 		print()
-		print("Generation:", iRepeat+1)
+		print("Generation:", iRepeat)
 		print("You have entered a dungeon")
 		agent_host.sendCommand("chat /gamerule naturalRegeneration false")
 		agent_host.sendCommand("chat /gamerule doMobLoot false")
+		if (win_generation == [] or win_generation[-1] != iRepeat-1):
+			agent_host.sendCommand("chat /give @p diamond_sword 1 0 {display:{Name:'Death',Lore:['one hit kill']},ench:[{id:16,lvl:1000},{id:20,lvl:1000},{id:21,lvl:30},{id:32,lvl:100},{id:34,lvl:1000},{id:51,lvl:1000}],HideFlags:5,Unbreakable:1}")
 
 		while world_state.is_mission_running:
-			time.sleep(0.02)
+			time.sleep(0.01)
+			# agent_host.sendCommand("turn 0")
+			# agent_host.sendCommand("turn " + str(network.agent.look_difference))
 			if len(world_state.observations) > 0 and len(world_state.video_frames) > 0:
 				if (first == True):
 					msg = world_state.observations[-1].text
 					ob = json.loads(msg)
 					frame = world_state.video_frames[0]
+
 					action = network.init_network(frame, ob, False)
 					network.agent.process_action(agent_host, network.agent.actions[action])
 					first = False
@@ -155,13 +164,18 @@ if __name__=='__main__':
 					msg = world_state.observations[-1].text
 					ob = json.loads(msg)
 					frame = world_state.video_frames[0]
+					img = network.agent.getPixels(frame)
+					cv2.imshow('image', img)
+					cv2.waitKey(0)
 					prev_action = action
 					action = network.train_network(frame, ob, False)
 					network.agent.process_action(agent_host, network.agent.actions[action])
 
 				if len(ob['entities']) == 1:
 					win += 1
-					win_generation.append(iRepeat + 1)
+					win_generation.append(iRepeat)
+					timer = time.time() - start_time
+					times.append(round(timer, 2))
 					agent_host.sendCommand("quit")
 
 			world_state = agent_host.getWorldState()
@@ -171,8 +185,10 @@ if __name__=='__main__':
 
 		network.train_network(frame, ob, True)
 		print("Mission ended")
-		print("score:", network.agent.reward)
+		scores.append(round(network.agent.reward,2))
+		print("score:", round(network.agent.reward,2))
 		print("wins:", win)
-		# time = start_time - time.time()
-		# print("time:", time)
+		print(times)
+		print(scores)
 		print(win_generation)
+		agent_host.sendCommand("quit")

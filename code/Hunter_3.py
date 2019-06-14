@@ -16,15 +16,20 @@ class Hunter:
 		self.reward = 0
 
 		self.actions = ["MoveUp", "MoveDown", "StopMoving", "TurnLeft", "TurnRight", "Attack"]
-		self.rewards = {"Health":-5, "Death":-100, "Look":1, "Hit":300, "Kill": 400}
+		self.rewards = {"Health":-5, "Death":-20, "Swing":-1, "Hit":30, "Kill": 80, "Distance":-0.1, "NotLook":-0.1, "Look":1}
 
 		self.q_table = {}
 
 		self.currentHealth = 20
 		self.currentTarget = ""
+		self.current_yaw = 0
+		self.look_difference = 0
+		self.turn_rate_scale = 90
 		self.los = ""
+		self.yaw = 0
 		self.x_pos = 0
 		self.z_pos = 0
+		self.prev_action = ""
 
 		self.enemies = {}
 		self.alive = 0
@@ -32,13 +37,17 @@ class Hunter:
 	# get reward function
 	def getReward(self, ob):
 		reward = 0
-
 		if ('MobsKilled' not in ob) or ('LineOfSight' not in ob):
 			return 0
+
+		#if self.prev_action == "Attack":
+			#reward += self.rewards["Swing"]
 
 		self.alive = len(ob['entities'])
 		kills = (len(ob['entities']) - 1) - self.alive
 		damage_taken = (self.currentHealth - ob['Life'])
+
+		self.yaw = ob['Yaw']
 
 		if (kills > 0):
 			reward += kills * self.rewards['Kill']
@@ -52,14 +61,28 @@ class Hunter:
 
 		# update enemies info
 		self.getEnemiesInfo(ob['entities'])
+		current_enemies = [entity['id'] for entity in ob['entities'] if entity['name'] != "CombatEvolvedAI"]
+
+		if self.currentTarget == "" or self.currentTarget not in current_enemies:
+			if self.currentTarget != "":
+				self.enemies.pop(self.currentTarget)
+			self.currentTarget = self.getClosestEntity()
+		
+		if self.currentTarget != "":
+			# self.look_at_target()
+
+			distance_from_target = self.getDistance(self.x_pos, self.z_pos, self.enemies[self.currentTarget][0][0], self.enemies[self.currentTarget][0][0])
+			reward += distance_from_target * self.rewards['Distance']
 
 		self.currentHealth = ob['Life']
 		self.kills = ob['MobsKilled']
 
 		# update agent sight
-		self.los = ob['LineOfSight']["type"]
-		if (self.los in MOB_TYPES):
+		if ob['LineOfSight']["type"] in MOB_TYPES:
 			reward += self.rewards['Look']
+		else:
+			reward += self.rewards['NotLook']
+
 
 		self.reward += reward
 
@@ -88,7 +111,8 @@ class Hunter:
 		else:
 			return random.choice(list(possible_action_list.keys()))
 
-	def process_action(self, agent_host, action):
+	def process_action(self, agent_host, action, degree = 0):
+		self.prev_action = action 
 		if action == "StopMoving":
 			agent_host.sendCommand("setYaw 90")
 			agent_host.sendCommand("move 0")
@@ -106,11 +130,14 @@ class Hunter:
 
 		elif action == "TurnLeft":
 			agent_host.sendCommand("move 0")
-			agent_host.sendCommand("turn -0.5")
+			agent_host.sendCommand("turn -0.7")
 
 		elif action == "TurnRight":
 			agent_host.sendCommand("move 0")
-			agent_host.sendCommand("turn 0.5")
+			agent_host.sendCommand("turn 0.7")
+
+		elif action == "Turn":
+			agent_host.sendCommand("turn" + str(degree))
 
 		elif action == "Attack":
 			agent_host.sendCommand("attack 1")
@@ -143,6 +170,50 @@ class Hunter:
 				if key in self.enemies.keys():
 					self.reward += (self.enemies[key][1] - enemy_health) * self.rewards["Hit"]
 				self.enemies[key] = ((ent['x'], ent['z']), enemy_health)
+
+	def getClosestEntity(self):
+		nearest_entity = ""
+		distance = 999999
+
+		for ent in self.enemies.keys():				
+			x2 = self.enemies[ent][0][0]
+			z2 = self.enemies[ent][0][1]
+
+			comparable = self.getDistance(self.x_pos,x2,self.z_pos,z2)
+
+			if comparable < distance:
+				distance = comparable
+				nearest_entity = ent
+
+		return nearest_entity
+
+	def normalize_yaw(self, yaw):
+		original_yaw = yaw
+		if yaw > 180.:
+			factor = math.floor((yaw + 180.) / 360.)
+		elif yaw < -180:
+			factor = math.ceil((yaw-180.) / 360.)
+		else:
+			return yaw
+		yaw -= 360. * factor
+		return yaw
+
+	def look_at_target(self):
+		current_yaw = self.yaw
+		current_target = self.enemies[self.currentTarget]
+		best_yaw = math.degrees(math.atan2(current_target[0][1] - self.z_pos, 
+			current_target[0][0] - self.x_pos)) - 90
+		difference = self.normalize_yaw(best_yaw - current_yaw);
+		difference /= self.turn_rate_scale
+		threshold = 0.0
+
+		if difference < threshold and difference > 0:
+			difference = threshold
+
+		elif difference > -threshold and difference < 0:
+			difference = -threshold
+
+		self.look_difference = difference
 
 	def getPixels(self, frame):                                    
 		width = frame.width                                

@@ -12,9 +12,11 @@ def generate_room(width=20, length=20, monsters = 1):
 
     for _ in range(monsters):
         monster = random.choice(MOB_TYPES)
-        x_pos = random.randint(-8, 8)
-        z_pos = random.randint(-2, 8)
+        x_pos = 0
+        z_pos = 5
         room += '<DrawEntity x="' + str(x_pos) + '" y="64" z="' + str(z_pos) + '" type="' + monster + '"/>'
+        x_pos -= 1
+        z_pos += 1
 
 
     return room

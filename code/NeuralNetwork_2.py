@@ -24,7 +24,7 @@ actions = 6
 gamma = .99
 observe = 1000
 
-initial_epsilon = 0.7
+initial_epsilon = 1.0
 final_epsilon = 0.05
 decay_rate = 0.995
 replay_memory = 20000
