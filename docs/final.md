@@ -30,7 +30,7 @@ Some more details of our environments.
 #### States
 Our states are 3 images (3 frames per tick) and processed by cv2 into a 84x84 grayscale image before being processed by the CNN.
 
-![States](Sceenshot_3.jpg "states")
+![States](Sceenshot_2_1.jpg "states")
 
 #### Actions
 For our actions, we used continuous movement. We allow the AI to attack, move both forwards and backwards and to turn in both directions. Overall the AI had the following actions:
