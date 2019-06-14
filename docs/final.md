@@ -48,6 +48,11 @@ For our actions, we used continuous movement. We allow the AI to attack, move bo
  - Having an enemy in the line of sight: +1 points
  - Having an enemy not in the line of sight: -0.1 points
 
+#### Algorithms and Equations
+We decided to use Deep Q Network to train our agent with providing 3 frames/images of the state as inputs to our convolutional neural network. The basic idea of Deep Q Network is similar to that of the Q-Learning where we have a reward (Q-Value) associated with a state and each of its corresponding action(s). Then we select the action which possesses the maximum Q-Value among all options. Our previous q-learning algorithm in our first baseline status report was adequate for training with 5 actions and a single enemy but with an increase in the number of actions to 6 and an increase in the density of mobs as well as the type of mobs, the number of states increases in complexity significantly and thus, we decided to use Deep Q Network, in which the Q-Function is represented by a Neural Network that takes a fixed input of images and outputs an action for the AI to perform based on q values.
+
+To balance between exploration and exploitation, we introduce Epsilon (-greedy) value which decreases at a constant decay rate once the number of runs exceeds the training observation number.
+
 ## Evaluation 
 #### Quantatitve
 We tested our agent using different weapons to see how it would perform in those situations. 
