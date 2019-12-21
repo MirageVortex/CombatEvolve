@@ -32,6 +32,14 @@ Our states are 3 images (3 frames per tick) and processed by cv2 into a 84x84 gr
 
 <img src="Screenshot_2_1.jpg" alt="States" title="States">
 
+We also provided additional information for the states:
+ - Number of Zombies left
+ - Distance of each zombie from the agent
+ - Zombie's position on the map
+ - The agent's position on the map
+ - The agent's line of sight (if agent is looking at zombie or not)
+ - Agent's current health
+
 #### Actions
 For our actions, we used continuous movement. We allow the AI to attack, move both forwards and backwards and to turn in both directions. Overall the AI had the following actions:
  - Move Forward
